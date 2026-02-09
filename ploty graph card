@@ -1,0 +1,77 @@
+type: custom:plotly-graph
+title: L2 Kennlinien Entladen vs Laden
+refresh_interval: 30
+raw_plotly_config: true
+entities:
+  - entity: sensor.l2_wirkungsgradkurve_entladen
+    name: Entladen η
+    type: scatter
+    mode: lines
+    x: |-
+      $ex (meta.curve_points || [])
+        .filter(p => (p.n || 0) >= (meta.min_n_plot || 10))
+        .map(p => Number(p.x))
+    "y": |-
+      $ex (meta.curve_points || [])
+        .filter(p => (p.n || 0) >= (meta.min_n_plot || 10))
+        .map(p => Number(p.y))
+  - entity: sensor.l2_wirkungsgradkurve_laden
+    name: Laden η
+    type: scatter
+    mode: lines
+    x: |-
+      $ex (meta.curve_points || [])
+        .filter(p => (p.n || 0) >= (meta.min_n_plot || 10))
+        .map(p => Number(p.x))
+    "y": |-
+      $ex (meta.curve_points || [])
+        .filter(p => (p.n || 0) >= (meta.min_n_plot || 10))
+        .map(p => Number(p.y))
+  - entity: sensor.l2_wirkungsgradkurve_entladen
+    name: Entladen n
+    type: scatter
+    mode: lines+markers
+    yaxis: y2
+    x: |-
+      $ex (meta.curve_points || [])
+        .filter(p => (p.n || 0) >= (meta.min_n_plot || 10))
+        .map(p => Number(p.x))
+    "y": |-
+      $ex (meta.curve_points || [])
+        .filter(p => (p.n || 0) >= (meta.min_n_plot || 10))
+        .map(p => Number(p.n || 0))
+  - entity: sensor.l2_wirkungsgradkurve_laden
+    name: Laden n
+    type: scatter
+    mode: lines+markers
+    yaxis: y2
+    x: |-
+      $ex (meta.curve_points || [])
+        .filter(p => (p.n || 0) >= (meta.min_n_plot || 10))
+        .map(p => Number(p.x))
+    "y": |-
+      $ex (meta.curve_points || [])
+        .filter(p => (p.n || 0) >= (meta.min_n_plot || 10))
+        .map(p => Number(p.n || 0))
+layout:
+  height: 340
+  xaxis:
+    title: Leistung (W)
+    dtick: 200
+    range:
+      - 50
+      - 2400
+  yaxis:
+    title: Wirkungsgrad (%)
+    range:
+      - 50
+      - 100
+    dtick: 5
+  yaxis2:
+    title: Datenpunkte n
+    overlaying: "y"
+    side: right
+    rangemode: tozero
+    showgrid: false
+config:
+  displayModeBar: false
