@@ -1,0 +1,36 @@
+wg_curve_l2:
+  module: wg_curve_dual_mode
+  class: EfficiencyCurveDualMode
+
+  # Gate
+  mode_entity: sensor.gesamt_kombisensor_laden_entladen
+  deadband_w: 80
+
+  # L2 Inputs
+  plug_entity: sensor.shellyazplug_b08184ed523c_power
+  pack_p1_entity: sensor.fo4nhn4n2001108_power
+  pack_p2_entity: sensor.fo4nhn4n2400904_power
+
+  # L3 Inputs -> werden in DIESELBE Datenbasis geschrieben
+  enable_l3: true
+  l3_mode_entity: sensor.gesamt_kombisensor_laden_entladen
+  l3_plug_entity: sensor.shelly_az_plug_power
+  l3_pack_p1_entity: sensor.fo4nhn2n1400476_power
+  l3_pack_p2_entity: sensor.fo4nhn2n1400391_power
+
+  # X-Achse
+  x_source: plug        # oder pack
+
+  # Output bleibt L2 (keine zusätzlichen Entitäten)
+  out_base: sensor.l2_wirkungsgradkurve
+
+  # Eine Datei als gemeinsame Datenbasis (L2+L3 zusammen)
+  storage_path: /config/wg_curve_all.json
+
+  # Sampling
+  bin_w: 50
+  max_w: 2400
+  sample_s: 10
+  min_x_w: 50
+  min_n_plot: 10
+  save_every_s: 10
