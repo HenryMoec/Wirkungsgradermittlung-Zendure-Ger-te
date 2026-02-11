@@ -10,7 +10,7 @@ Needs:
 
 Entities:
 - mode_entity (Sensor which shows charging (-) and discharging (+))
-- plug_entity (Sensor which shows input/output power device 1, in my case a Shelly Plug is installed)
+- plug_entity (Sensor which shows input/output power of logging device, in my case a Shelly Plug is installed)
 - pack_p1_entity (Sensor which which shows input/output power of the battery; IMPORTANT: have to be a batterie entity, not an inverter entity;can be more then 1 pack)
 
 How to be set:
